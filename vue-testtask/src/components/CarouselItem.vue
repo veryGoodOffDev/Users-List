@@ -1,25 +1,13 @@
 <template>
-  <carousel :autoplay="false" :nav="false" :dots="false">
-    <!-- <button @click="() => console.log('click') ">Click</button> -->
+  <carousel :autoplay="false" :nav="false" :dots="false" v-if="getAllPhotosForAlbums.length >= 5">
     <CarouselItemSlide
-      v-for="img of this.filteredPhotos(album.id)"
+      v-for="img of getAllPhotosForAlbums"
       :key="img.id"
       v-bind:img="img"
 
     />
-
-    <!-- <img 
-     :src="photo.thumbnailUrl" /> -->
-    <!-- <img
-      src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    /> -->
-
-    <!-- <h1>{{album.title}}</h1> -->
-    <!-- <img src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-     <img src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-     <img src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-     <img src="https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""> -->
   </carousel>
+  <h2 v-else>Загрузка фото...</h2>
 </template>
 
 <script>
@@ -38,53 +26,14 @@ export default {
   },
 
   computed:{
-    ...mapGetters(["getAllPhotos", "filteredPhotos"]),
-    // filteredPhotos() {
-    //   return this.photos[1]
-    // }
-  },
-  methods:{
-    // getPhotos(id) {
-    //   this.filteredPhotos(id)
-    // }
-  },
-
-  mounted() {
-    // this.fetchPhotos(this.albumId)
+    ...mapGetters(["getAllPhotos"]),
+    getAllPhotosForAlbums() {
+    return  this?.getAllPhotos?.[this.album.id] || []
+  }
   },
   components: {
     CarouselItemSlide,
     carousel,
-  },
-//   props: {
-//     photos: {
-//       type: Array,
-//     },
-//   },
-
-  data() {
-
-    return {
-        // photos:this.$store.getters.getAllPhotos,
-      //   photos: [
-      //     {
-      //       id: 1,
-      //       url: "https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      //     },
-      //     {
-      //       id: 2,
-      //       url: "https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      //     },
-      //     {
-      //       id: 3,
-      //       url: "https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      //     },
-      //     {
-      //       id: 4,
-      //       url: "https://images.unsplash.com/photo-1682687219640-b3f11f4b7234?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      //     },
-      //   ],
-    };
   },
 };
 </script>

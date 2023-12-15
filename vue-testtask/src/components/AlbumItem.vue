@@ -1,6 +1,5 @@
 <template>
     <li>
-        {{album.title}}
         <Carousel v-bind:album="album"/>
     </li>
 </template>
@@ -17,23 +16,5 @@ export default {
             type: Object || Array,
         }
     },
-
-    data() {
-        return {
-            
-        };
-    },
-
-    mounted() {
-        
-    },
-
-    methods: {
-        
-    },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

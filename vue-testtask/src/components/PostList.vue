@@ -1,11 +1,12 @@
 <template>
-    <ul>
+    <ul class="post-list">
          <!-- <Carousel /> -->
         
         <PostItem
             v-for="post of posts"
             v-bind:post="post"
             :key="post.id"
+            @delete-post="deletePost"
         />
        
         
@@ -15,12 +16,16 @@
 <script>
 // import Carousel from './Carousel.vue';
 import PostItem from './PostItem.vue';
+import {mapGetters} from "vuex"
 export default {
     name: 'PostList',
     props:['posts', 'albums'],
     components: {
         PostItem,
         // Carousel,
+    },
+    computed: {
+        ...mapGetters(["getPosts", "getFilteredPosts"])
     },
 
     data() {
@@ -34,11 +39,13 @@ export default {
     },
 
     methods: {
-        
+        deletePost(id) {
+            this.$emit('delete-post', id);
+        }
     },
 };
 </script>
 
 <style lang="scss" scoped>
-@import './postlist.scss'
+@import './postlist.scss';
 </style>

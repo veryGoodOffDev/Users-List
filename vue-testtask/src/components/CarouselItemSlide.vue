@@ -8,7 +8,7 @@ export default {
   name: "CarouselItemSlide",
   props: {
     img: {
-      type: Object || Array,
+      type: Object
     },
   },
 

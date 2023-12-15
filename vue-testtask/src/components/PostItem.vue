@@ -1,7 +1,11 @@
 <template>
-    <li>
-        <h2>{{post.title}}</h2>
-        <p>{{post.body}}</p>
+    <li class="post">
+        <h3 class="post-title">{{post.title}}</h3>
+        <p class="post-text">{{post.body}}</p>
+        <div class="post__buttons">
+            <button @click="$emit('delete-post', post.id)" class="btn btn-danger">Удалить</button>
+        </div>
+        
     </li>
 </template>
 
@@ -26,11 +30,13 @@ export default {
     },
 
     methods: {
-        
+        deletePost() {
+
+        }
     },
 };
 </script>
 
 <style lang="scss" scoped>
-
+@import "./postlist.scss";
 </style>

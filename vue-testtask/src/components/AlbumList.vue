@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul class="album-list">
         <AlbumItem
            v-for="album of albums" 
            :key="album.id"
@@ -36,5 +36,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@import "./albumlist.scss";
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav><router-link to="/">Users</router-link> |</nav>
+    <nav><router-link to="/">Users</router-link></nav>
     <router-view />
   </div>
 </template>
@@ -16,6 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import './global.scss';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

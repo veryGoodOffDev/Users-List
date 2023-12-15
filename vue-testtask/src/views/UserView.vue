@@ -1,10 +1,11 @@
 <template>
     <div >
         <h1>
-            User c id {{$route.params.id}}
+            User: {{$route.params.userName}}
+            
         </h1>
-        <AlbumList v-bind:albums="albums"/>
-        <PostList v-bind:posts="posts"/>
+        <AlbumList v-bind:albums="getAlbums"/>
+        <PostList v-bind:posts="getPosts" @delete-post="deletePostById"/>
     </div>
 
 </template>
@@ -12,8 +13,7 @@
 <script>
 import PostList from '../components/PostList.vue';
 import AlbumList from '../components/AlbumList.vue';
-import {mapGetters} from 'vuex'
-import axios from 'axios'
+import {mapGetters, mapActions, mapMutations} from 'vuex'
 
 export default {
     name: 'UserView',
@@ -24,28 +24,26 @@ export default {
 
     data() {
         return {
-            posts:[],
-            albums:[],
             id:this.$route.params.id
         };
     },
+     methods: {
+    ...mapActions(["fetchPosts", "fetchAlbums"]),
+    ...mapMutations(["deletePost"]),
    
-    beforeMount() {
-         
+    deletePostById(id) {
+        this.deletePost(id)
+    }
+    
     },
-    created() {
-        
-    },
-    computed: mapGetters(["getStatus"]),
+    computed: {
+        ...mapGetters(["getPosts", "getAlbums", "getFilteredPosts"]),
 
-   async mounted() {
-        const res = await axios.get('https://jsonplaceholder.typicode.com/posts?userId=' + this.id)
-        const posts = await res.data
-        this.posts = posts
-        const nextres = await axios.get('https://jsonplaceholder.typicode.com/albums?userId=' + this.id)
-        const albums = await nextres.data
-        this.albums = albums
-       
+        },
+
+    mounted() {
+        this.fetchPosts(this.id)
+        this.fetchAlbums(this.id)
     },
 
 

@@ -1,8 +1,8 @@
-ul {
+.user-list {
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    margin-left: 20px;
 }
 
 li {

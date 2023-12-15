@@ -1,6 +1,6 @@
 <template>
 
-    <ul>
+    <ul class="user-list">
       <UserItem
       v-for="user of users"
       v-bind:user="user"
